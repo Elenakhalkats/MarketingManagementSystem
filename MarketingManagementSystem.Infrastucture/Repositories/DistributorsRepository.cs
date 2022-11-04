@@ -29,12 +29,12 @@ public class DistributorsRepository : IDistributorsRepository
     public async Task<DistributorEntity> GetDistributorById(int Id)
     {
         var distributor = _context.Distributors.FirstOrDefault(x => x.Id == Id);
+        if (distributor == null) throw new Exception("Distributor Not Found!");
         return distributor;
     }
     public async Task<DistributorInfoEntities> GetDistributorInfoById(int Id)
     {
         var Distributor = await GetDistributorById(Id);
-        if (Distributor == null) throw new Exception("Distributor Not Found!");
 
         var IdentityCardInfo = _context.IdentityCardInfos.FirstOrDefault(x => x.DistributorId == Id);
         var ContactInfo = _context.ContactInfos.FirstOrDefault(x => x.DistributorId == Id);
@@ -110,15 +110,13 @@ public class DistributorsRepository : IDistributorsRepository
 
     public async Task<bool> RecommendDistributor(int RecommendatorId, int RecommendToId)
     {
-        var recommendToDist = _context.Distributors.FirstOrDefault(x => x.Id == RecommendToId); 
-        if(recommendToDist == null) throw new Exception("Distributor Not Found!");
+        var recommendToDist = await GetDistributorById(RecommendToId); 
 
         var recommendTo = _context.Recommendations.FirstOrDefault(x => x.RecommendTo == RecommendToId);
-        if (recommendTo != null) throw new ArgumentException("This distributor already has a recommendator!");
+        if (recommendTo != null) throw new Exception("This distributor already has a recommendator!");
 
-        var distributorAsRecommendator = _context.Distributors.FirstOrDefault(x => x.Id == RecommendatorId);
-        if (distributorAsRecommendator == null) throw new Exception("Distributor Not Found!");
-        if (!distributorAsRecommendator.RecommendAccess) throw new ArgumentException("This recommendator can't have more recommendations");
+        var distributorAsRecommendator = await GetDistributorById(RecommendatorId);
+        if (!distributorAsRecommendator.RecommendAccess) throw new Exception("This recommendator can't have more recommendations");
         
         var hierarchyForRecommendation = 0;
 
@@ -126,7 +124,7 @@ public class DistributorsRepository : IDistributorsRepository
         if (distributorAsRecommendTo != null)
         {
             var hierarchy = distributorAsRecommendTo.Hierarchy;
-            if (hierarchy >= 4) throw new ArgumentException("This recommendator is not acceptable");
+            if (hierarchy >= 4) throw new Exception("This recommendator is not acceptable");
             hierarchyForRecommendation = hierarchy + 1;
         }
         else
@@ -159,10 +157,8 @@ public class DistributorsRepository : IDistributorsRepository
 
     public async Task<DistributorBonuses> GetBonusesByDistributorId(int Id)
     {
-        var distributor = _context.Distributors.FirstOrDefault(x => x.Id == Id);
         var bonuses = _context.DistributorBonuses.Where(x => x.DistributorId == Id).ToList();
-
-        if (distributor == null) throw new Exception("Distributor not found");
+        var distributor = await GetDistributorById(Id);
 
         var result = new DistributorBonuses(
             distributor,
@@ -223,7 +219,7 @@ public class DistributorsRepository : IDistributorsRepository
         var minBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == minBonus);
 
         var distributorId = minBonusEntity.DistributorId;
-        var distributor = _context.Distributors.FirstOrDefault(x => x.Id == distributorId);
+        var distributor = await GetDistributorById(distributorId);
 
         return distributor;
     }
@@ -235,25 +231,19 @@ public class DistributorsRepository : IDistributorsRepository
         var maxBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == maxBonus);
 
         var distributorId = maxBonusEntity.DistributorId;
-        var distributor = _context.Distributors.FirstOrDefault(x => x.Id == distributorId);
+        var distributor = await GetDistributorById(distributorId);
 
         return distributor;
     }
     private async Task<bool> UpdateDistributorInfo(DistributorEntity entity)
     {
-        var distributorInfo = await _context.Distributors.FirstOrDefaultAsync(x => x.Id == entity.Id);
-        if (distributorInfo == null)
-        {
-            throw new Exception("Distributor Not found");
-        }
-        else
-        {
-            distributorInfo.FirstName = entity.FirstName;
-            distributorInfo.LastName = entity.LastName;
-            distributorInfo.BirthDate = entity.BirthDate;
-            distributorInfo.Gender = entity.Gender;
-            distributorInfo.Img = entity.Img;
-        }
+        var distributorInfo = await GetDistributorById(entity.Id);
+
+        distributorInfo.FirstName = entity.FirstName;
+        distributorInfo.LastName = entity.LastName;
+        distributorInfo.BirthDate = entity.BirthDate;
+        distributorInfo.Gender = entity.Gender;
+        distributorInfo.Img = entity.Img;
 
         _context.Update(distributorInfo);
         await _context.SaveChangesAsync();

@@ -15,14 +15,28 @@ public class ProductsSalesController : Controller
     [HttpGet("GetProduct")]
     public async Task<IActionResult> GetProductById([FromQuery] int id)
     {
-        var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
-        return Ok(result);
+        try
+        {
+            var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
     [HttpPost("AddProduct")]
     public async Task<IActionResult> AddProduct([FromBody] AddProductCommand req)
     {
-        var result = await _mediator.Send(req);
-        return Ok(result);  
+        try
+        {
+            var result = await _mediator.Send(req);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        } 
     }
     [HttpGet("GetSales")]
     public async Task<IActionResult> GetSales([FromQuery] GetSalesQuery? filterObjects)
@@ -34,7 +48,14 @@ public class ProductsSalesController : Controller
     [HttpPost("AddSale")]
     public async Task<IActionResult> AddSale([FromBody] AddSaleCommand req)
     {
-        var result = await _mediator.Send(req);
-        return Ok(result);
+        try
+        {
+            var result = await _mediator.Send(req);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

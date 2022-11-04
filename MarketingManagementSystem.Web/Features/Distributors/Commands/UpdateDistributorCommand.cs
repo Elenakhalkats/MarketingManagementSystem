@@ -28,8 +28,7 @@ public sealed record UpdateDistributorCommand : IRequest<bool>
         public async Task<bool> Handle(UpdateDistributorCommand request, CancellationToken cancellationToken)
         {
             var distributorEntity = await _distributorsRepository.GetDistributorById(request.Id);
-
-            try { if (distributorEntity == null) throw new Exception("Distributor not found"); } catch { return false; }
+            if (distributorEntity == null) throw new Exception("Distributor not found");
 
             var distributorInfoEntities = await _distributorsRepository.GetDistributorInfoById(distributorEntity.Id);
 
