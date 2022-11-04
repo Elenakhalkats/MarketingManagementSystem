@@ -24,6 +24,7 @@ public sealed record AddSaleCommand(
         public async Task<Unit> Handle(AddSaleCommand request, CancellationToken cancellationToken)
         {
             await _distributorsRepository.GetDistributorById(request.DistributorId);
+
             var newSale = new SaleEntity(request.DistributorId, request.Date, request.ProductId, request.UnitPrice, request.TotalPrice);
             await _productsSalesRepository.AddSale(newSale);
 

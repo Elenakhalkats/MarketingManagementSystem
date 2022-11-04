@@ -29,7 +29,6 @@ public class DistributorsRepository : IDistributorsRepository
     public async Task<DistributorEntity> GetDistributorById(int Id)
     {
         var distributor = _context.Distributors.FirstOrDefault(x => x.Id == Id);
-        if (distributor == null) throw new Exception("Distributor Not Found!");
         return distributor;
     }
     public async Task<DistributorInfoEntities> GetDistributorInfoById(int Id)
@@ -51,15 +50,14 @@ public class DistributorsRepository : IDistributorsRepository
         
         return distributor.Entity;
     }
-    public async Task<int> AddDistributorInfo(DistributorInfoEntities Distributor)
+    public async Task<int> AddDistributorInfo(DistributorInfoEntities Distributor, int DistributorId)
     {
         if(Distributor.ContactInfo != null) _context.ContactInfos.Add(Distributor.ContactInfo); 
         if(Distributor.IdentityCardInfo != null) _context.IdentityCardInfos.Add(Distributor.IdentityCardInfo); 
         if(Distributor.AddressInfo != null) _context.AddressInfos.Add(Distributor.AddressInfo);
 
         _context.SaveChanges();
-
-        return Distributor.DistributorInfo.Id;
+        return DistributorId;
     }
     public async Task<bool> UpdateDistributorInfo(DistributorEntity? distributor,
                                                     IdentityCardInfoEntity? identityCardInfo,

@@ -9,7 +9,7 @@ public interface IDistributorsRepository
     Task<DistributorEntity> GetDistributorById(int Id);
     Task<DistributorInfoEntities> GetDistributorInfoById(int Id);
     Task<DistributorEntity> AddDistributor(DistributorEntity Distributor);
-    Task<int> AddDistributorInfo(DistributorInfoEntities Distributor);
+    Task<int> AddDistributorInfo(DistributorInfoEntities Distributor, int DistributorId);
     Task<bool> UpdateDistributorInfo(DistributorEntity distributor,
                                     IdentityCardInfoEntity identityCardInfo,
                                     ContactInfoEntity contactInfo,

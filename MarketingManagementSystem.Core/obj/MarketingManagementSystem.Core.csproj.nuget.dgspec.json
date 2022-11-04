@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj": {}
+    "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj": {
+    "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj",
+        "projectUniqueName": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj",
         "projectName": "MarketingManagementSystem.Core",
-        "projectPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj",
+        "projectPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj",
         "packagesPath": "C:\\Users\\E.Akhalkatsi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Core\\obj\\",
+        "outputPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

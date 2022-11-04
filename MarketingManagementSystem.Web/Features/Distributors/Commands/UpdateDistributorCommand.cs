@@ -1,4 +1,5 @@
-﻿using MarketingManagementSystem.Core.Entities;
+﻿using AutoMapper;
+using MarketingManagementSystem.Core.Entities;
 using MarketingManagementSystem.Core.Enums;
 using MarketingManagementSystem.SharedKernel.Interfaces;
 using MarketingManagementSystem.Web.Models;
@@ -18,18 +19,17 @@ public sealed record UpdateDistributorCommand : IRequest<bool>
     public class UpdateDistributorCommandHandler : IRequestHandler<UpdateDistributorCommand, bool>
     {
         private readonly IDistributorsRepository _distributorsRepository;
-        public UpdateDistributorCommandHandler(IDistributorsRepository distributorsRepository)
+        private readonly IMapper _mapper;
+        public UpdateDistributorCommandHandler(IDistributorsRepository distributorsRepository, IMapper mapper)
         {
             _distributorsRepository = distributorsRepository;
+            _mapper = mapper;
         }
         public async Task<bool> Handle(UpdateDistributorCommand request, CancellationToken cancellationToken)
         {
-
             var distributorEntity = await _distributorsRepository.GetDistributorById(request.Id);
-            if (distributorEntity == null)
-            {
-                throw new Exception("Distributor not found");
-            }
+
+            try { if (distributorEntity == null) throw new Exception("Distributor not found"); } catch { return false; }
 
             var distributorInfoEntities = await _distributorsRepository.GetDistributorInfoById(distributorEntity.Id);
 
@@ -74,7 +74,7 @@ public sealed record UpdateDistributorCommand : IRequest<bool>
                         newInfo.TermOfDocument,
                         newInfo.PersonalNumber,
                         newInfo.IssueAgency,
-                        distributorId );
+                        distributorId);
                 }
                 catch (Exception)
                 {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zyfbESlay3FgAfst4TZZI+MnlfYTF6KshaYJz3EJe1nzNuwOQcuBKJrNvLasQiW1HPq8Z5YSVUdZoOi39PEY4w==",
+  "dgSpecHash": "norRolrNhTYpB7AM55EHUMpGsTfAECvOfhverU8QdZEAito2n351osfPXYwHyPt5ETtu7WKCa4PNCMzBz2d6pA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\E.Akhalkatsi\\Desktop\\TaskForDevelopers\\MarketingManagementSystem\\MarketingManagementSystem.Infrastucture\\MarketingManagementSystem.Infrastucture.csproj",
+  "projectFilePath": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Infrastucture\\MarketingManagementSystem.Infrastucture.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\E.Akhalkatsi\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\E.Akhalkatsi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

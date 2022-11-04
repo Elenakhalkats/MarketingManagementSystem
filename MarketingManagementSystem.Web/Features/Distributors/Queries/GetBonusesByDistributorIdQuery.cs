@@ -23,16 +23,9 @@ public sealed record GetBonusesByDistributorIdQuery : IRequest<DistributorBonus>
         {
             var distributorBonus = await _distributorsRepository.GetBonusesByDistributorId(request.Id);
             var distributor = _mapper.Map<Distributor>(distributorBonus.Distributor);
-            
-            var bonuses = new List<Bonus>();
 
             var bonusEntities = distributorBonus.BonusEntities;
-            foreach (var bonusEntity in bonusEntities)
-            {
-                var bonus = _mapper.Map<Bonus>(bonusEntity);
-                bonuses.Add(bonus); 
-            }
-
+            var bonuses = _mapper.Map<List<Bonus>>(bonusEntities);
             var result = new DistributorBonus(distributor, bonuses);
 
             return result;

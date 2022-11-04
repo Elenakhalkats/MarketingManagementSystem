@@ -23,7 +23,6 @@ public sealed class GetDistributorWithMaxBonusQuery : IRequest<Distributor>
         {
             var distributor = await _distributorsRepository.GetDistributorWithMaxBonus();
             var result = _mapper.Map<Distributor>(distributor);
-
             return result;  
         }
     }

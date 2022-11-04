@@ -21,7 +21,6 @@ public sealed record AddProductCommand(
         {
             var newProduct = new ProductEntity(request.ProductCode, request.ProductName, request.UnitPrice);
             await _productsSalesRepository.AddProduct(newProduct);
-
             return Unit.Value;
         }
     }

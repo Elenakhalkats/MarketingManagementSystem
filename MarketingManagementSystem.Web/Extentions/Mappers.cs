@@ -8,13 +8,13 @@ public class Mappers : Profile
 {
 	public Mappers()
 	{
-		CreateMap<ProductEntity, Product>();
-		CreateMap<SaleEntity, Sale>();
-		CreateMap<DistributorEntity, Distributor>();
-		CreateMap<BonusEntity, Bonus>();
-		CreateMap<SaleEntity, Sale>();
-		CreateMap<IdentityCardInfoEntity, IdentityCardInfo>();
-		CreateMap<AddressInfoEntity, AddressInfo>();
-		CreateMap<ContactInfoEntity, ContactInfo>();
+		CreateMap<ProductEntity, Product>().ReverseMap();
+		CreateMap<SaleEntity, Sale>().ReverseMap();
+		CreateMap<DistributorEntity, Distributor>().ReverseMap();
+        CreateMap<BonusEntity, Bonus>().ReverseMap();
+		CreateMap<SaleEntity, Sale>().ReverseMap();
+		CreateMap<IdentityCardInfoEntity, IdentityCardInfo>().ReverseMap();
+		CreateMap<AddressInfoEntity, AddressInfo>().ReverseMap();
+		CreateMap<ContactInfoEntity, ContactInfo>().ReverseMap();
     }
 }

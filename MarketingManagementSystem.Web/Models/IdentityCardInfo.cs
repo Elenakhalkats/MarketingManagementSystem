@@ -12,7 +12,8 @@ public class IdentityCardInfo
         DateTime releaseDate,
         string termOfDocument,
         string personalNumber,
-        string? issueAgency)
+        string? issueAgency,
+        int distributorId)
     {
         Id = id;
         DocumentType = documentType;
@@ -22,6 +23,7 @@ public class IdentityCardInfo
         TermOfDocument = termOfDocument;
         PersonalNumber = personalNumber;
         IssueAgency = issueAgency;
+        DistributorId = distributorId;
     }
 
     public int? Id { get; set; }
@@ -32,5 +34,6 @@ public class IdentityCardInfo
     public string TermOfDocument { get; set; }
     public string PersonalNumber { get; set; }
     public string? IssueAgency { get; set; }
+    public int DistributorId { get; set; }
 
 }

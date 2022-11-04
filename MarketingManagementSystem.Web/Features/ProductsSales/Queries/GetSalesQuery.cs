@@ -25,16 +25,10 @@ public record GetSalesQuery(
         }
         public async Task<List<Sale>> Handle(GetSalesQuery request, CancellationToken cancellationToken)
         {
-            var result = new List<Sale>();
-
             var Filter = new SalesFilterObjects(request.DistributorId ?? null, request.StartDate ?? null, request.EndDate ?? null, request.ProductId ?? null);
             var sales = await _productsSalesRepository.GetSales(Filter);
-            foreach (var sale in sales)
-            {
-                var unit = _mapper.Map<Sale>(sale);
-                result.Add(unit);
-            }
-
+       
+            var result = _mapper.Map<List<Sale>>(sales);
             return result;
         }
     }

@@ -22,18 +22,9 @@ public sealed record GetRecommendationsByDistributorIdQuery : IRequest<List<Dist
 
         public async Task<List<Distributor>> Handle(GetRecommendationsByDistributorIdQuery request, CancellationToken cancellationToken)
         {
-            var distributors = new List<Distributor>();
-
             var distributorEntities = await _distributorsRepository.GetRecommendationsById(request.Id);
-            foreach (var distributorEntity in distributorEntities)
-            {
-                if(distributorEntity != null)
-                {
-                    var distributor = _mapper.Map<Distributor>(distributorEntity);
-                    distributors.Add(distributor);
-                }
-            }
-            return distributors;
+            var result = _mapper.Map<List<Distributor>>(distributorEntities);
+            return result;
         }
     }
 }

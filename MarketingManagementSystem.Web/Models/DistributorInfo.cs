@@ -47,14 +47,17 @@ public class UpdateIdentityCardInfo
     public string? TermOfDocument { get; set; }
     public string? PersonalNumber { get; set; }
     public string? IssueAgency { get; set; }
+    public int? DistributorId { get; set; }
 }
 public class UpdateContactInfo
 {
     public ContactType? ContactType { get; set; }
     public string? Contact { get; set; }
+    public int? DistributorId { get; set; }
 }
 public class UpdateAddressInfo
 {
     public AddressType? AddressType { get; set; }
     public string? Address { get; set; }
+    public int? DistributorId { get; set; }
 }

@@ -13,7 +13,6 @@ public sealed class ProductEntity : AggregateRoot
         ProductCode = productCode;
         ProductName = productName;  
         UnitPrice = unitPrice;
-        ProductCode = productCode;
     }
     [Required]
     public string ProductCode { get; set; }

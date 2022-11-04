@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MarketingManagementSystem.Core.Entities;
 using MarketingManagementSystem.Core.Models;
 using MarketingManagementSystem.SharedKernel.Interfaces;
 using MarketingManagementSystem.Web.Models;
@@ -27,14 +28,7 @@ public sealed record GetDistributorsQuery(
             var Filter = new DistributorsFilterObjects(request.FirstName ?? null, request.LastName ?? null);
             var distributors = await _distributorsRepository.GetDistributors(Filter);
 
-            var result = new List<Distributor>();
-
-            foreach (var distributor in distributors)
-            {
-                var dist = _mapper.Map<Distributor>(distributor);
-                result.Add(dist);
-            }
-
+            var result = _mapper.Map<List<Distributor>>(distributors);
             return result;
         }
     }

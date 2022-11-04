@@ -8,7 +8,7 @@ public class Product
        string productName,
        float unitPrice)
     {
-        Id = Id;
+        Id = id;
         ProductCode = productCode;
         ProductName = productName;
         UnitPrice = unitPrice;
