@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarketingManagementSystem.Core.Entities;
 
-public class BonusEntity : AggregateRoot
+public class BonusEntity : Entity<int>
 {
     public BonusEntity(
         int distributorId,
@@ -23,5 +23,23 @@ public class BonusEntity : AggregateRoot
     [Required]
     public DateTime EndDate { get; set; }
     [Required]
+    public float CountedBonus { get; set; }
+}
+public class Bonus
+{
+    public Bonus(
+        int? id,
+        DateTime startDate,
+        DateTime endDate,
+        float countedBonus)
+    {
+        Id = id;
+        StartDate = startDate;
+        EndDate = endDate;
+        CountedBonus = countedBonus;
+    }
+    public int? Id { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
     public float CountedBonus { get; set; }
 }

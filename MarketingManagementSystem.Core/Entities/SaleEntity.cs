@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarketingManagementSystem.Core.Entities;
 
-public class SaleEntity : AggregateRoot
+public class SaleEntity : Entity<int>
 {
     public SaleEntity(
         int distributorId,
@@ -30,5 +30,33 @@ public class SaleEntity : AggregateRoot
     [Required]
     public float TotalPrice { get; set; }
     [Required]
+    public bool Counted { get; set; }
+}
+public class Sale
+{
+    public Sale(
+        int? id,
+        int distributorId,
+        DateTime date,
+        int productId,
+        float unitPrice,
+        float totalPrice,
+        bool counted)
+    {
+        Id = id;
+        DistributorId = distributorId;
+        Date = date;
+        ProductId = productId;
+        UnitPrice = unitPrice;
+        TotalPrice = totalPrice;
+        Counted = counted;
+    }
+
+    public int? Id { get; set; }
+    public int DistributorId { get; set; }
+    public DateTime Date { get; set; }
+    public int ProductId { get; set; }
+    public float UnitPrice { get; set; }
+    public float TotalPrice { get; set; }
     public bool Counted { get; set; }
 }

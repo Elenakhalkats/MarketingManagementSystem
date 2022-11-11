@@ -1,7 +1,7 @@
 ﻿using MarketingManagementSystem.Core.Entities;
-using MarketingManagementSystem.Core.Models;
+using MarketingManagementSystem.Core.Interfaces;
+using MarketingManagementSystem.Core.ResponseModels;
 using MarketingManagementSystem.Infrastucture.Contexts;
-using MarketingManagementSystem.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace MarketingManagementSystem.Infrastucture.Repositories;
@@ -166,50 +166,17 @@ public class DistributorsRepository : IDistributorsRepository
         
         return result;
     }
-
-    public Task<List<BonusEntity>> CountBonus(DateTime StartDate, DateTime EndDate, List<DistributorSalesFields> distributorSale)
+    public async Task<List<DistributorRecommendationEntity>> GetRecommendations()
     {
-        var bonuses = new List<BonusEntity>();
-
         var recommendations = _context.Recommendations.ToList();
-
-        foreach (var distributor in distributorSale)
-        {
-            float bonus = 0;
-            bonus += distributor.CountedTotal / 10;
-
-            var recommendToD = recommendations.FindAll(x => x.Recommendator == distributor.DistributorId).ToList();
-            if (recommendToD.Count() != 0)
-            {
-                foreach (var recommendTo in recommendToD)
-                {
-                    var sale = distributorSale.FirstOrDefault(x => x.DistributorId == recommendTo.RecommendTo);
-                    if (sale != null)
-                    {
-                        bonus += sale.CountedTotal / 20;
-
-                        var recommendToDD = recommendations.FindAll(x => x.Recommendator == recommendTo.RecommendTo).ToList();
-                        if (recommendToDD.Count() != 0)
-                        {
-                            foreach (var recommendTo1 in recommendToDD)
-                            {
-                                var sale1 = distributorSale.FirstOrDefault(x => x.DistributorId == recommendTo.RecommendTo);
-                                if (sale1 != null)
-                                {
-                                    bonus += sale1.CountedTotal / 20;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            var bonusEntity = new BonusEntity(distributor.DistributorId, StartDate, EndDate, bonus);
-            bonuses.Add(bonusEntity);
-        }
+        return recommendations;
+    }
+    public async Task<bool> AddBonuses(List<BonusEntity> bonuses)
+    {
         _context.DistributorBonuses.AddRange(bonuses);
         _context.SaveChanges();
 
-        return Task.FromResult(bonuses); 
+        return true;
     }
 
     public async Task<DistributorEntity> GetDistributorWithMinBonus()

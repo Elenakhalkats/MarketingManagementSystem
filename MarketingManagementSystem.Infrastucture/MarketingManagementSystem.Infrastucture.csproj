@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MarketingManagementSystem.Core\MarketingManagementSystem.Core.csproj" />
-    <ProjectReference Include="..\MarketingManagementSystem.SharedKernel\MarketingManagementSystem.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

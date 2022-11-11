@@ -1546,31 +1546,6 @@
         "runtime": {
           "bin/placeholder/MarketingManagementSystem.Core.dll": {}
         }
-      },
-      "MarketingManagementSystem.SharedKernel/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "MarketingManagementSystem.Core": "1.0.0",
-          "MediatR": "11.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Microsoft.Data.SqlClient": "5.0.1",
-          "Microsoft.Data.Sqlite": "6.0.10",
-          "Microsoft.EntityFrameworkCore": "6.0.10",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.10",
-          "Microsoft.EntityFrameworkCore.Sqlite": "6.0.10",
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "6.0.10",
-          "Swashbuckle.AspNetCore": "6.4.0",
-          "Swashbuckle.AspNetCore.Swagger": "6.4.0",
-          "System.Data.SqlClient": "4.8.4"
-        },
-        "compile": {
-          "bin/placeholder/MarketingManagementSystem.SharedKernel.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MarketingManagementSystem.SharedKernel.dll": {}
-        }
       }
     }
   },
@@ -4463,18 +4438,12 @@
       "type": "project",
       "path": "../MarketingManagementSystem.Core/MarketingManagementSystem.Core.csproj",
       "msbuildProject": "../MarketingManagementSystem.Core/MarketingManagementSystem.Core.csproj"
-    },
-    "MarketingManagementSystem.SharedKernel/1.0.0": {
-      "type": "project",
-      "path": "../MarketingManagementSystem.SharedKernel/MarketingManagementSystem.SharedKernel.csproj",
-      "msbuildProject": "../MarketingManagementSystem.SharedKernel/MarketingManagementSystem.SharedKernel.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
       "MarketingManagementSystem.Core >= 1.0.0",
-      "MarketingManagementSystem.SharedKernel >= 1.0.0",
       "MediatR >= 11.0.0",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "Microsoft.Data.SqlClient >= 5.0.1",
@@ -4523,9 +4492,6 @@
           "projectReferences": {
             "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj": {
               "projectPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.Core\\MarketingManagementSystem.Core.csproj"
-            },
-            "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.SharedKernel\\MarketingManagementSystem.SharedKernel.csproj": {
-              "projectPath": "C:\\Users\\E.Akhalkatsi\\Desktop\\MarketingManagementSystem\\MarketingManagementSystem.SharedKernel\\MarketingManagementSystem.SharedKernel.csproj"
             }
           }
         }

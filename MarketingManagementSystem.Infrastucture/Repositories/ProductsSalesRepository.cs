@@ -1,7 +1,7 @@
 ﻿using MarketingManagementSystem.Core.Entities;
-using MarketingManagementSystem.Core.Models;
+using MarketingManagementSystem.Core.Interfaces;
+using MarketingManagementSystem.Core.ResponseModels;
 using MarketingManagementSystem.Infrastucture.Contexts;
-using MarketingManagementSystem.SharedKernel.Interfaces;
 
 namespace MarketingManagementSystem.Infrastucture.Repositories;
 

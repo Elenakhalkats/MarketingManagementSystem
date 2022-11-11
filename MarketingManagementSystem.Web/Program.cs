@@ -1,8 +1,8 @@
 using MarketingManagementSystem.Infrastucture.Contexts;
 using MarketingManagementSystem.Infrastucture.Repositories;
-using MarketingManagementSystem.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
+using MarketingManagementSystem.Core.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.AddScoped<IDistributorsRepository, DistributorsRepository>();
 builder.Services.AddScoped<IProductsSalesRepository, ProductsSalesRepository>();
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddMediatR(typeof(IDistributorsRepository).Assembly);
 builder.Services.AddMediatR(typeof(IProductsSalesRepository).Assembly);

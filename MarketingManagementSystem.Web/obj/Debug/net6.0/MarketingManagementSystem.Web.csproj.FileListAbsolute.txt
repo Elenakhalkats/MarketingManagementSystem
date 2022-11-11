@@ -192,10 +192,8 @@ C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSyste
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.Core.dll
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.Infrastucture.dll
-C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.SharedKernel.dll
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.Core.pdb
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.Infrastucture.pdb
-C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\bin\Debug\net6.0\MarketingManagementSystem.SharedKernel.pdb
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\obj\Debug\net6.0\MarketingManagementSystem.Web.csproj.AssemblyReference.cache
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\obj\Debug\net6.0\MarketingManagementSystem.Web.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Web\obj\Debug\net6.0\MarketingManagementSystem.Web.AssemblyInfoInputs.cache

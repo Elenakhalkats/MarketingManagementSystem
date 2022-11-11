@@ -115,7 +115,6 @@ namespace MarketingManagementSystem.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Img")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -165,12 +164,10 @@ namespace MarketingManagementSystem.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DocumentNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("DocumentSerialNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -178,7 +175,6 @@ namespace MarketingManagementSystem.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IssueAgency")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -246,7 +242,7 @@ namespace MarketingManagementSystem.Web.Migrations
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");
 
-                    b.Property<float>("UnitPrice")
+                    b.Property<float?>("UnitPrice")
                         .HasColumnType("real");
 
                     b.HasKey("Id");

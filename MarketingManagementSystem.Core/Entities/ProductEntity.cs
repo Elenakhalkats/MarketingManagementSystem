@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarketingManagementSystem.Core.Entities;
 
-public sealed class ProductEntity : AggregateRoot
+public sealed class ProductEntity : Entity<int>
 {
     public ProductEntity(
         string productCode,
@@ -19,5 +19,23 @@ public sealed class ProductEntity : AggregateRoot
     [Required]
     public string ProductName { get; set; }
     [Required]
+    public float UnitPrice { get; set; }
+}
+public class Product
+{
+    public Product(
+       int? id,
+       string productCode,
+       string productName,
+       float unitPrice)
+    {
+        Id = id;
+        ProductCode = productCode;
+        ProductName = productName;
+        UnitPrice = unitPrice;
+    }
+    public int? Id { get; set; }
+    public string ProductCode { get; set; }
+    public string ProductName { get; set; }
     public float UnitPrice { get; set; }
 }

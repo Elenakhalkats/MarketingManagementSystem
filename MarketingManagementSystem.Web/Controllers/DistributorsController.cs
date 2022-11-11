@@ -1,5 +1,6 @@
-﻿using MarketingManagementSystem.Web.Features.Distributors.Commands;
-using MarketingManagementSystem.Web.Features.Distributors.Queries;
+﻿using MarketingManagementSystem.Core.Features.Distributors.Commands;
+using MarketingManagementSystem.Core.Features.Distributors.Queries;
+using MarketingManagementSystem.Web.Features.Distributors.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

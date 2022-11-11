@@ -22,9 +22,7 @@ C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSyste
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.Infrastucture.dll
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.Infrastucture.pdb
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.Core.dll
-C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.SharedKernel.dll
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.Core.pdb
-C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\bin\Debug\net6.0\MarketingManagementSystem.SharedKernel.pdb
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\obj\Debug\net6.0\MarketingManagementSystem.Infrastucture.csproj.AssemblyReference.cache
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\obj\Debug\net6.0\MarketingManagementSystem.Infrastucture.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem.Infrastucture\obj\Debug\net6.0\MarketingManagementSystem.Infrastucture.AssemblyInfoInputs.cache

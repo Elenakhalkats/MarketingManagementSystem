@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarketingManagementSystem.Core.Entities;
 
-public sealed class DistributorRecommendationEntity : AggregateRoot
+public sealed class DistributorRecommendationEntity : Entity<int>
 {
     public DistributorRecommendationEntity(
         int recommendator,
