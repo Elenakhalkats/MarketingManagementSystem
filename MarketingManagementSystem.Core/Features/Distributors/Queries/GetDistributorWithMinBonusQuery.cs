@@ -21,7 +21,7 @@ public sealed class GetDistributorWithMinBonusQuery : IRequest<Distributor>
 
         public async Task<Distributor> Handle(GetDistributorWithMinBonusQuery request, CancellationToken cancellationToken)
         {
-            var distributor = await _distributorsRepository.GetDistributorWithMinBonus();
+            var distributor = await _distributorsRepository.GetMinBonus();
             var result = _mapper.Map<Distributor>(distributor);
 
             return result;

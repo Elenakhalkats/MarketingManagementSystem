@@ -1,4 +1,5 @@
-﻿using MarketingManagementSystem.Core.Features.Distributors.Commands;
+﻿using MarketingManagementSystem.Core.Enums;
+using MarketingManagementSystem.Core.Features.Distributors.Commands;
 using MarketingManagementSystem.Core.Features.Distributors.Queries;
 using MarketingManagementSystem.Web.Features.Distributors.Commands;
 using MediatR;
@@ -122,16 +123,17 @@ public class DistributorsController : ControllerBase
         var result = await _mediator.Send(req);
         return Ok(result);
     }
-    [HttpGet("GetDistributorWithMinBonus")]
+    [HttpGet("MinBonus")]
     public async Task<IActionResult> GetDistributorWithMinBonus()
     {
         var result = await _mediator.Send(new GetDistributorWithMinBonusQuery());
         return Ok(result);
     }
-    [HttpGet("GetDistributorWithMaxBonus")]
+    [HttpGet("MaxBonus")]
     public async Task<IActionResult> GetDistributorWithMaxBonus()
     {
         var result = await _mediator.Send(new GetDistributorWithMaxBonusQuery());
         return Ok(result);
     }
+
 }

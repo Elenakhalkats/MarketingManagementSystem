@@ -56,5 +56,4 @@ public class UpdateAddressInfo
 {
     public AddressType? AddressType { get; set; }
     public string? Address { get; set; }
-    public int? DistributorId { get; set; }
 }

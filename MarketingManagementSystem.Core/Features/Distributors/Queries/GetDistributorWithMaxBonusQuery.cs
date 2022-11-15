@@ -21,9 +21,10 @@ public sealed class GetDistributorWithMaxBonusQuery : IRequest<Distributor>
 
         public async Task<Distributor> Handle(GetDistributorWithMaxBonusQuery request, CancellationToken cancellationToken)
         {
-            var distributor = await _distributorsRepository.GetDistributorWithMaxBonus();
+            var distributor = await _distributorsRepository.GetMaxBonus();
             var result = _mapper.Map<Distributor>(distributor);
-            return result;  
+
+            return result;
         }
     }
 }

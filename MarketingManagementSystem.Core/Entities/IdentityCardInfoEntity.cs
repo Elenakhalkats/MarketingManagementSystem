@@ -109,5 +109,4 @@ public class UpdateIdentityCardInfo
     public string? TermOfDocument { get; set; }
     public string? PersonalNumber { get; set; }
     public string? IssueAgency { get; set; }
-    public int? DistributorId { get; set; }
 }

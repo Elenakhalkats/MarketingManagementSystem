@@ -178,8 +178,13 @@ public class DistributorsRepository : IDistributorsRepository
 
         return true;
     }
-
-    public async Task<DistributorEntity> GetDistributorWithMinBonus()
+    public async Task<List<BonusEntity>> GetBonuses()
+    {
+        var bonuses = _context.DistributorBonuses.ToList();
+        if (bonuses.Count == 0) throw new Exception("Bonuses not found");
+        return bonuses;
+    }
+    public async Task<DistributorEntity> GetMinBonus()
     {
         var bonuses = _context.DistributorBonuses.Select(x => new { x.DistributorId, x.CountedBonus });
         var minBonus = bonuses.Select(x => x.CountedBonus).ToList().Min();
@@ -190,14 +195,13 @@ public class DistributorsRepository : IDistributorsRepository
 
         return distributor;
     }
-
-    public async Task<DistributorEntity> GetDistributorWithMaxBonus()
+    public async Task<DistributorEntity> GetMaxBonus()
     {
         var bonuses = _context.DistributorBonuses.Select(x => new { x.DistributorId, x.CountedBonus });
-        var maxBonus = bonuses.Select(x => x.CountedBonus).ToList().Max();
-        var maxBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == maxBonus);
+        var minBonus = bonuses.Select(x => x.CountedBonus).ToList().Max();
+        var minBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == minBonus);
 
-        var distributorId = maxBonusEntity.DistributorId;
+        var distributorId = minBonusEntity.DistributorId;
         var distributor = await GetDistributorById(distributorId);
 
         return distributor;
