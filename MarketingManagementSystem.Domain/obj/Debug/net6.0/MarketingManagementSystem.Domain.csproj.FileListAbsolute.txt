@@ -1,0 +1,14 @@
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.csproj.AssemblyReference.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.AssemblyInfo.cs
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\bin\Debug\net6.0\MarketingManagementSystem.Domain.deps.json
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\bin\Debug\net6.0\MarketingManagementSystem.Domain.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\bin\Debug\net6.0\MarketingManagementSystem.Domain.pdb
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\refint\MarketingManagementSystem.Domain.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.pdb
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\ref\MarketingManagementSystem.Domain.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\bin\Debug\net6.0\MarketingManagementSystem.Domain.runtimeconfig.json
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Domain\obj\Debug\net6.0\MarketingManagementSystem.Domain.genruntimeconfig.cache

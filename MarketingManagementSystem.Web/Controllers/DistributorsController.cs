@@ -1,7 +1,5 @@
-﻿using MarketingManagementSystem.Core.Enums;
-using MarketingManagementSystem.Core.Features.Distributors.Commands;
-using MarketingManagementSystem.Core.Features.Distributors.Queries;
-using MarketingManagementSystem.Web.Features.Distributors.Commands;
+﻿using MarketingManagementSystem.Application.Features.Distributors.Commands;
+using MarketingManagementSystem.Application.Features.Distributors.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +14,7 @@ public class DistributorsController : ControllerBase
     }
 
     [HttpGet("GetDistributors")]
+    [Produces("application/json")]
     public async Task<IActionResult> GetDistributors([FromQuery] GetDistributorsQuery? filterObjects)
     {
         var result = await _mediator.Send(filterObjects);
@@ -24,97 +23,47 @@ public class DistributorsController : ControllerBase
     [HttpGet("GetDistributor")]
     public async Task<IActionResult> GetDistributorById([FromQuery] int id)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetDistributorByIdQuery { Id = id });
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var result = await _mediator.Send(new GetDistributorByIdQuery { Id = id });
+        return Ok(result);
     }
 
     [HttpPost("AddDistributor")]
     public async Task<IActionResult> AddDistributor([FromBody] AddDistributorCommand req)
     {
-        try
-        {
-            var result = await _mediator.Send(req);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var result = await _mediator.Send(req);
+        return Ok(result);
     }
     [HttpPut("UpdateDistributor")]
     public async Task<IActionResult> UpdateDistributorById([FromBody] UpdateDistributorCommand req)
     {
-        try
-        {
-            var result = await _mediator.Send(req);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-
-        }
+        var result = await _mediator.Send(req);
+        return Ok(result);
     }
     [HttpDelete("DeleteDistributor")]
     public async Task<IActionResult> DeleteDistributor([FromQuery] int id)
     {
-        try
-        {
-            var result = await _mediator.Send(new DeleteDistributorCommand { Id = id });
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var result = await _mediator.Send(new DeleteDistributorCommand { Id = id });
+        return Ok(result);
     }
     [HttpGet("GetDistributorRecomendations")]
     public async Task<IActionResult> GetRecommendationsById([FromQuery] int id)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetRecommendationsByDistributorIdQuery { Id = id });
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var result = await _mediator.Send(new GetRecommendationsByDistributorIdQuery { Id = id });
+        return Ok(result);
     }
     [HttpPost("AddNewRecomendation")]
     public async Task<IActionResult> RecommendDistributor(
         [FromQuery] int recommendatorId,
         [FromQuery] int recommendToId)
     {
-        try
-        {
-            var result = await _mediator.Send(new AddDistributorRecommendations(recommendatorId, recommendToId));
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var result = await _mediator.Send(new AddDistributorRecommendations(recommendatorId, recommendToId));
+        return Ok(result);
     }
     [HttpPost("GetDistributorBonuses")]
     public async Task<IActionResult> GetBonusesByDistributorId([FromQuery] int id)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetBonusesByDistributorIdQuery { Id = id });
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var result = await _mediator.Send(new GetBonusesByDistributorIdQuery { Id = id });
+        return Ok(result);
     }
 
     [HttpPost("CountDistributorsBonuses")]

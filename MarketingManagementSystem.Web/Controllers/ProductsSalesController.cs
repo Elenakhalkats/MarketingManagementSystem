@@ -1,5 +1,5 @@
-﻿using MarketingManagementSystem.Core.Features.ProductsSales.Commands;
-using MarketingManagementSystem.Core.Features.ProductsSales.Queries;
+﻿using MarketingManagementSystem.Application.Features.ProductsSales.Commands;
+using MarketingManagementSystem.Application.Features.ProductsSales.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

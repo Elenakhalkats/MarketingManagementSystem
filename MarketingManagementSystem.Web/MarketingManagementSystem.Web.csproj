@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="EntityFrameworkCore.SqlProfile" Version="2.1.0.1" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
@@ -27,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MarketingManagementSystem.Core\MarketingManagementSystem.Core.csproj" />
+    <ProjectReference Include="..\MarketingManagementSystem.Application\MarketingManagementSystem.Application.csproj" />
     <ProjectReference Include="..\MarketingManagementSystem.Infrastucture\MarketingManagementSystem.Infrastucture.csproj" />
   </ItemGroup>
 

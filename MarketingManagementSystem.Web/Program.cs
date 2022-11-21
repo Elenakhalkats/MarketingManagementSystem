@@ -2,7 +2,8 @@ using MarketingManagementSystem.Infrastucture.Contexts;
 using MarketingManagementSystem.Infrastucture.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
-using MarketingManagementSystem.Core.Interfaces;
+using MarketingManagementSystem.Application.Exceptions;
+using MarketingManagementSystem.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(typeof(IDistributorsRepository).Assembly);
 builder.Services.AddMediatR(typeof(IProductsSalesRepository).Assembly);
 
-builder.Services.AddDbContext<MarketingManagementSystemContext>(options =>
+builder.Services.AddDbContext<
+    MarketingManagementSystemContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MarketingManagementSystemDB"), b => b.MigrationsAssembly("MarketingManagementSystem.Web"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MarketingManagementSystemDB")); 
 });
 
 var app = builder.Build();
@@ -33,6 +35,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseMiddleware<AppExceptionHandler>();
+    app.UseHsts();
+
 }
 
 app.UseHttpsRedirection();

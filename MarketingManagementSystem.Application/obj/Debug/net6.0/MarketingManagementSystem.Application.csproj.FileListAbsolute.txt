@@ -1,0 +1,17 @@
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.csproj.AssemblyReference.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.AssemblyInfoInputs.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.AssemblyInfo.cs
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Application.deps.json
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Application.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Application.pdb
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Domain.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Domain.pdb
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.csproj.CopyComplete
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\refint\MarketingManagementSystem.Application.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.pdb
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\ref\MarketingManagementSystem.Application.dll
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\bin\Debug\net6.0\MarketingManagementSystem.Application.runtimeconfig.json
+C:\Users\E.Akhalkatsi\Desktop\MarketingManagementSystem\MarketingManagementSystem\MarketingManagementSystem.Application\obj\Debug\net6.0\MarketingManagementSystem.Application.genruntimeconfig.cache
