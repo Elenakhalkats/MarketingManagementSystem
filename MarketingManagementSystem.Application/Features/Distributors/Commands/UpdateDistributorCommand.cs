@@ -6,7 +6,7 @@ using MarketingManagementSystem.Domain.Enums;
 using MediatR;
 
 namespace MarketingManagementSystem.Application.Features.Distributors.Commands;
-public sealed record UpdateDistributorCommand : IRequest<bool>
+public sealed record UpdateDistributorCommand : IRequest<int>
 {
     public int Id { get; set; }
     public UpdateDistributorInfo DistributorInfo { get; set; }
@@ -16,7 +16,7 @@ public sealed record UpdateDistributorCommand : IRequest<bool>
         DistributorInfo = distributorInfo;
     }
 
-    public class UpdateDistributorCommandHandler : IRequestHandler<UpdateDistributorCommand, bool>
+    public class UpdateDistributorCommandHandler : IRequestHandler<UpdateDistributorCommand, int>
     {
         private readonly IDistributorsRepository _distributorsRepository;
         private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ public sealed record UpdateDistributorCommand : IRequest<bool>
             _distributorsRepository = distributorsRepository;
             _mapper = mapper;
         }
-        public async Task<bool> Handle(UpdateDistributorCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateDistributorCommand request, CancellationToken cancellationToken)
         {
             var distributorEntity = await _distributorsRepository.GetDistributorByIdAsync(request.Id);
             if (distributorEntity == null) throw new DistributorNotFoundException();

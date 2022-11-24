@@ -16,7 +16,7 @@ public sealed record AddDistributorRecommendations(int RecommendatorId, int Reco
         {
             var recommendatorId = request.RecommendatorId;
             var recommendToId = request.RecommendToId;
-
+            
             await _distributorsRepository.RecommendDistributorAsync(recommendatorId, recommendToId);
             return Unit.Value;
         }

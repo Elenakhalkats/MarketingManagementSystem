@@ -3,7 +3,9 @@ using MarketingManagementSystem.Application.Interfaces;
 using MarketingManagementSystem.Application.ResponseModels;
 using MarketingManagementSystem.Domain.Entities;
 using MarketingManagementSystem.Infrastucture.Contexts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MarketingManagementSystem.Infrastucture.Repositories;
 
@@ -20,7 +22,7 @@ public class DistributorsRepository : IDistributorsRepository
     {
         var distributors = await _context.Distributors.ToListAsync();
 
-        if(distributorsFilterObjects != null)
+        if (distributorsFilterObjects != null)
         {
             var firstNameHasValue = !string.IsNullOrEmpty(distributorsFilterObjects.FirstName);
             var lastNameHasValue = !string.IsNullOrEmpty(distributorsFilterObjects.LastName);
@@ -31,16 +33,14 @@ public class DistributorsRepository : IDistributorsRepository
 
         return distributors;
     }
-
-
     public async Task<DistributorEntity> GetDistributorByIdAsync(int Id)
     {
         var distributor = await _context.Distributors.FirstOrDefaultAsync(x => x.Id == Id);
+        if (distributor == null) throw new DistributorNotFoundException();
         return distributor;
     }
     public async Task<DistributorInfoEntities> GetDistributorInfoByIdAsync(int Id)
     {
-
         var query = from distributor in _context.Distributors.Where(x => x.Id == Id)
                     from identityInfo in _context.IdentityCardInfos.Where(x => x.DistributorId == Id).DefaultIfEmpty()
                     from contactInfo in _context.ContactInfos.Where(x => x.DistributorId == Id).DefaultIfEmpty()
@@ -59,7 +59,7 @@ public class DistributorsRepository : IDistributorsRepository
     public async Task<DistributorEntity> AddDistributorAsync(DistributorEntity Distributor)
     {
         var distributor = await _context.Distributors.AddAsync(Distributor);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return distributor.Entity;
     }
@@ -72,7 +72,7 @@ public class DistributorsRepository : IDistributorsRepository
         _context.SaveChanges();
         return DistributorId;
     }
-    public async Task<bool> UpdateDistributorInfoAsync(DistributorEntity? distributor,
+    public async Task<int> UpdateDistributorInfoAsync(DistributorEntity? distributor,
                                                     IdentityCardInfoEntity? identityCardInfo,
                                                     ContactInfoEntity? contactInfo,
                                                     AddressInfoEntity? addressInfo)
@@ -83,42 +83,58 @@ public class DistributorsRepository : IDistributorsRepository
         if (contactInfo != null) await UpdateOrCreateContactInfoAsync(contactInfo);
         if (addressInfo != null) await UpdateOrCreateAddressInfoAsync(addressInfo);
 
-        return true;
+        return distributor.Id;
     }
     public async Task<bool> DeleteDistributorAsync(int Id)
     {
         var distributorEntity = await GetDistributorByIdAsync(Id);
+        if (distributorEntity == null) throw new DistributorNotFoundException();
         _context.Distributors.Remove(distributorEntity);
 
-        _context.SaveChanges();
+        var rec = await _context.Recommendations.FirstOrDefaultAsync(x => x.RecommendedId == Id);
+
+        if(rec != null)
+        {
+            _context.Recommendations.Remove(rec);
+            var count = await _context.Recommendations.CountAsync(x => x.RecommendatorId == rec.RecommendatorId);
+            var dist = await GetDistributorByIdAsync(rec.RecommendatorId);
+            if (count == 3 && !dist.RecommendAccess) {
+                dist.RecommendAccess = true;
+                _context.Distributors.Update(dist); 
+            }
+        }
+        await _context.SaveChangesAsync();
         return true;
     }
     public async Task<List<DistributorEntity>> GetRecommendationsByIdAsync(int Id)
     {
-        var distributors = new List<DistributorEntity>();
+        var distributors = await _context.Distributors
+            .Where(x => _context.Recommendations
+            .Where(x => x.RecommendatorId == Id)
+            .Select(x => x.RecommendedId)
+            .Contains(x.Id))
+            .ToListAsync();
 
-        var recoms = await _context.Recommendations.Where(x => x.RecommendatorId == Id).ToListAsync();
-        foreach (var recommendation in recoms)
-        {
-            var distributor = await _context.Distributors.FirstOrDefaultAsync(x => x.Id == recommendation.RecommendedId);
-            if (distributor != null) distributors.Add(distributor);
-        }
+        if (distributors.IsNullOrEmpty()) throw new RecommendedDistributorsNotFoundException();
         return distributors;
     }
 
     public async Task<bool> RecommendDistributorAsync(int RecommendatorId, int RecommendToId)
     {
-        var recommendToDist = await GetDistributorByIdAsync(RecommendToId);
+        var recommendTo = await GetDistributorByIdAsync(RecommendToId);
+        if (recommendTo == null) throw new DistributorNotFoundException();
 
-        var recommendTo = await _context.Recommendations.FirstOrDefaultAsync(x => x.RecommendedId == RecommendToId);
-        if (recommendTo != null) throw new AlreadyRecommendedDistributorException();
-
+        var recommendToRecomendation = await _context.Recommendations.FirstOrDefaultAsync(x => x.RecommendedId == RecommendToId);
+        if (recommendToRecomendation != null) throw new AlreadyRecommendedDistributorException();
+        
+        //Check: recommendAccess of recommendator distributor 
         var distributorAsRecommendator = await GetDistributorByIdAsync(RecommendatorId);
+        if (distributorAsRecommendator == null) throw new DistributorNotFoundException();
         if (!distributorAsRecommendator.RecommendAccess) throw new HasNotRecommendAccessException();
 
-        var hierarchyForRecommendation = 0;
-
+        //Check: distributor hierarchy 
         var distributorAsRecommendTo = await _context.Recommendations.FirstOrDefaultAsync(x => x.RecommendedId == RecommendatorId);
+        var hierarchyForRecommendation = 0;
         if (distributorAsRecommendTo != null)
         {
             var hierarchy = distributorAsRecommendTo.Hierarchy;
@@ -130,6 +146,7 @@ public class DistributorsRepository : IDistributorsRepository
             hierarchyForRecommendation = 1;
         }
 
+        //check: "recommend to" distributors 
         var count = await _context.Recommendations.CountAsync(x => x.RecommendatorId == RecommendatorId);
 
         if (count == 2)
@@ -145,14 +162,14 @@ public class DistributorsRepository : IDistributorsRepository
             hierarchyForRecommendation);
 
         await _context.Recommendations.AddAsync(recommendation);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<DistributorBonuses> GetBonusesByDistributorIdAsync(int Id)
     {
-        var bonuses = _context.DistributorBonuses.Where(x => x.DistributorId == Id).ToList();
+        var bonuses = await _context.DistributorBonuses.Where(x => x.DistributorId == Id).ToListAsync();
         var distributor = await GetDistributorByIdAsync(Id);
 
         var result = new DistributorBonuses(
@@ -163,42 +180,35 @@ public class DistributorsRepository : IDistributorsRepository
     }
     public async Task<List<RecommendationEntity>> GetRecommendationsAsync()
     {
-        var recommendations = _context.Recommendations.ToList();
+        var recommendations = await _context.Recommendations.ToListAsync();
         return recommendations;
     }
     public async Task<bool> AddBonusesAsync(List<BonusEntity> bonuses)
     {
-        _context.DistributorBonuses.AddRange(bonuses);
-        _context.SaveChanges();
-
+        await _context.DistributorBonuses.AddRangeAsync(bonuses);
+        await _context.SaveChangesAsync();
         return true;
     }
     public async Task<List<BonusEntity>> GetBonusesAsync()
     {
-        var bonuses = _context.DistributorBonuses.ToList();
-        if (bonuses.Count == 0) throw new Exception();
+        var bonuses = await _context.DistributorBonuses.ToListAsync();
+        if (bonuses.Count == 0) throw new BonusesNotFoundException();
         return bonuses;
     }
     public async Task<DistributorEntity> GetMinBonusAsync()
     {
-        var bonuses = _context.DistributorBonuses.Select(x => new { x.DistributorId, x.CountedBonus });
-        var minBonus = bonuses.Select(x => x.CountedBonus).ToList().Min();
-        var minBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == minBonus);
-
-        var distributorId = minBonusEntity.DistributorId;
-        var distributor = await GetDistributorByIdAsync(distributorId);
-
+        var bonuses = await GetBonusesAsync();
+        var bonus = bonuses.MinBy(y => y.CountedBonus);
+        if (bonus == null) throw new BonusesNotFoundException();
+        var distributor = await GetDistributorByIdAsync(bonus.DistributorId);
         return distributor;
     }
     public async Task<DistributorEntity> GetMaxBonusAsync()
     {
-        var bonuses = _context.DistributorBonuses.Select(x => new { x.DistributorId, x.CountedBonus });
-        var minBonus = bonuses.Select(x => x.CountedBonus).ToList().Max();
-        var minBonusEntity = bonuses.FirstOrDefault(x => x.CountedBonus == minBonus);
-
-        var distributorId = minBonusEntity.DistributorId;
-        var distributor = await GetDistributorByIdAsync(distributorId);
-
+        var bonuses = await GetBonusesAsync();
+        var bonus = bonuses.MaxBy(y => y.CountedBonus);
+        if (bonus == null) throw new BonusesNotFoundException();
+        var distributor = await GetDistributorByIdAsync(bonus.DistributorId);
         return distributor;
     }
     private async Task<bool> UpdateDistributorInfoAsync(DistributorEntity entity)

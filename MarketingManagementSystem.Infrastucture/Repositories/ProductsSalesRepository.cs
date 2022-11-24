@@ -1,7 +1,9 @@
-﻿using MarketingManagementSystem.Application.Interfaces;
+﻿using MarketingManagementSystem.Application.Exceptions;
+using MarketingManagementSystem.Application.Interfaces;
 using MarketingManagementSystem.Application.ResponseModels;
 using MarketingManagementSystem.Domain.Entities;
 using MarketingManagementSystem.Infrastucture.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace MarketingManagementSystem.Infrastucture.Repositories;
 
@@ -13,40 +15,43 @@ public class ProductsSalesRepository : IProductsSalesRepository
     {
         _context = context;
     }
-    public async Task<bool> AddProductAsync(ProductEntity Product)
+    public async Task<int> AddProductAsync(ProductEntity Product)
     {
-        _context.Products.Add(Product);
-        _context.SaveChanges();
-        return true;
+        var product = await _context.Products.AddAsync(Product); 
+        await _context.SaveChangesAsync();
+
+        return product.Entity.Id;
     }
 
-    public async Task<bool> AddSaleAsync(SaleEntity Sale)
+    public async Task<int> AddSaleAsync(SaleEntity Sale)
     {
-        _context.Sales.Add(Sale);
-        _context.SaveChanges();
-        return true;
+        var sale = await _context.Sales.AddAsync(Sale);
+        await _context.SaveChangesAsync();
+
+        return sale.Entity.Id;
     }
 
     public async Task<ProductEntity> GetProductByIdAsync(int Id)
     {
-        var product = _context.Products.FirstOrDefault(x => x.Id == Id);
-        if (product == null) throw new Exception();
+        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == Id);
+        if (product == null) throw new ProductNotFoundException();
         return product;
     }
 
     public async Task<List<SaleEntity>> GetSalesAsync(SalesFilterObjects? salesFilterObjects)
     {
-        var sales = _context.Sales.Where(x => x.Counted != true).ToList();
+        var sales = await _context.Sales.Where(x => !x.Counted).ToListAsync();
+        if (sales.Count == 0) throw new SalesNotFoundException();
 
         if (salesFilterObjects != null)
         {
             if (salesFilterObjects.StartDate != null) 
-                sales = (List<SaleEntity>)sales.FindAll(x => x.Date > salesFilterObjects.StartDate);
+                sales = sales.FindAll(x => x.Date > salesFilterObjects.StartDate);
             if (salesFilterObjects.EndDate != null)
-                sales = (List<SaleEntity>)sales.FindAll(x => x.Date < salesFilterObjects.EndDate);
-            if (salesFilterObjects.DistributorId != null) sales = (List<SaleEntity>)sales.FindAll(x => x.DistributorId == salesFilterObjects.DistributorId);
-            if (salesFilterObjects.ProductId != null) sales = (List<SaleEntity>)sales.FindAll(x => x.ProductId == salesFilterObjects.ProductId);
-            if (salesFilterObjects.Counted != null) sales = (List<SaleEntity>)sales.FindAll(x => x.Counted == salesFilterObjects.Counted);
+                sales = sales.FindAll(x => x.Date < salesFilterObjects.EndDate);
+            if (salesFilterObjects.DistributorId != null) sales = sales.FindAll(x => x.DistributorId == salesFilterObjects.DistributorId);
+            if (salesFilterObjects.ProductId != null) sales = sales.FindAll(x => x.ProductId == salesFilterObjects.ProductId);
+            if (salesFilterObjects.Counted != null) sales = sales.FindAll(x => x.Counted == salesFilterObjects.Counted);
         }
         return sales;
     }
@@ -54,8 +59,7 @@ public class ProductsSalesRepository : IProductsSalesRepository
     public async Task<bool> UpdateSalesAsync(List<SaleEntity> SalesToUpdate)
     {
         _context.UpdateRange(SalesToUpdate);
-        _context.SaveChanges();
-
+        await _context.SaveChangesAsync();
         return true;
     }
 }

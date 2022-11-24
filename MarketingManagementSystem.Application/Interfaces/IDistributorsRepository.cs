@@ -10,7 +10,7 @@ public interface IDistributorsRepository
     Task<DistributorInfoEntities> GetDistributorInfoByIdAsync(int Id);
     Task<DistributorEntity> AddDistributorAsync(DistributorEntity Distributor);
     Task<int> AddDistributorInfoAsync(DistributorInfoEntities Distributor, int DistributorId);
-    Task<bool> UpdateDistributorInfoAsync(DistributorEntity distributor,
+    Task<int> UpdateDistributorInfoAsync(DistributorEntity distributor,
                                     IdentityCardInfoEntity identityCardInfo,
                                     ContactInfoEntity contactInfo,
                                     AddressInfoEntity addressInfo);

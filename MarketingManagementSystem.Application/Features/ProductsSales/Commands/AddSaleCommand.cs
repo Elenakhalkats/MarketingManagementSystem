@@ -9,9 +9,9 @@ public sealed record AddSaleCommand(
     DateTime Date,
     int ProductId,
     float UnitPrice,
-    float TotalPrice) : IRequest<Unit>
+    float TotalPrice) : IRequest<int>
 {
-    public class AddSaleCommandHandler : IRequestHandler<AddSaleCommand>
+    public class AddSaleCommandHandler : IRequestHandler<AddSaleCommand,int>
     {
         private readonly IProductsSalesRepository _productsSalesRepository;
         private readonly IDistributorsRepository _distributorsRepository;
@@ -21,14 +21,13 @@ public sealed record AddSaleCommand(
             _distributorsRepository = distributorsRepository;
         }
 
-        public async Task<Unit> Handle(AddSaleCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddSaleCommand request, CancellationToken cancellationToken)
         {
-            await _distributorsRepository.GetDistributorByIdAsync(request.DistributorId);
-
-            var newSale = new SaleEntity(request.DistributorId, request.Date, request.ProductId, request.UnitPrice, request.TotalPrice);
-            await _productsSalesRepository.AddSaleAsync(newSale);
-
-            return Unit.Value;
+            var distributor = await _distributorsRepository.GetDistributorByIdAsync(request.DistributorId);
+            var product = await _productsSalesRepository.GetProductByIdAsync(request.ProductId);
+            var newSale = new SaleEntity(distributor.Id, request.Date, product.Id, request.UnitPrice, request.TotalPrice);
+            var result = await _productsSalesRepository.AddSaleAsync(newSale);
+            return result;
         }
     }
 }

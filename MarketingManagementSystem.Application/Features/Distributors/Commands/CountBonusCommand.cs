@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using MarketingManagementSystem.Application.Exceptions;
 using MarketingManagementSystem.Application.Interfaces;
 using MarketingManagementSystem.Application.ResponseModels;
 using MarketingManagementSystem.Domain.Entities;
 using MediatR;
+using System;
 
 namespace MarketingManagementSystem.Application.Features.Distributors.Commands;
 
@@ -29,7 +31,10 @@ public sealed record CountBonusCommand(
             var StartDate = request.StartDate;
             var EndDate = request.EndDate;
 
-            var Filter = new SalesFilterObjects(null, request.StartDate, request.EndDate, null);
+            if (StartDate == default) StartDate = DateTime.MinValue;
+            if (EndDate == default) EndDate = DateTime.Now;
+
+            var Filter = new SalesFilterObjects(null, StartDate, EndDate, null);
             var sales = await _productSalesRepository.GetSalesAsync(Filter);
 
             var DistributorSales = GetDistributorsWithCountedSales(sales);
@@ -59,11 +64,10 @@ public sealed record CountBonusCommand(
         }
         private static List<DistributorSalesFields> GetDistributorsWithCountedSales(List<SaleEntity> sales)
         {
-            var distributorsIds = sales.DistinctBy(x => x.DistributorId).Select(x => x.DistributorId).ToList();
-
+            var distributorIds = sales.DistinctBy(x => x.DistributorId).Select(x => x.DistributorId);
             var DistributorSales = new List<DistributorSalesFields>();
 
-            foreach (var distributorId in distributorsIds)
+            foreach (var distributorId in distributorIds)
             {
                 var distributorSales = sales.FindAll(x => x.DistributorId == distributorId).ToList();
                 float Total = 0;
@@ -84,7 +88,7 @@ public sealed record CountBonusCommand(
                 float bonus = 0;
                 bonus += distributor.CountedTotal / 10; 
                 var recommendToD = recommendations.FindAll(x => x.RecommendatorId == distributor.DistributorId).ToList();
-                if (recommendToD.Count() != 0)
+                if (recommendToD.Count != 0)
                 {
                     foreach (var recommendTo in recommendToD)
                     {
@@ -94,7 +98,7 @@ public sealed record CountBonusCommand(
                             bonus += sale.CountedTotal / 20; 
 
                             var recommendToDD = recommendations.FindAll(x => x.RecommendatorId == recommendTo.RecommendedId).ToList();
-                            if (recommendToDD.Count() != 0)
+                            if (recommendToDD.Count != 0)
                             {
                                 foreach (var recommendTo1 in recommendToDD)
                                 {

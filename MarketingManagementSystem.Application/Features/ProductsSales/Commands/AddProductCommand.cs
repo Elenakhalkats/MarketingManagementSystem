@@ -7,9 +7,9 @@ namespace MarketingManagementSystem.Application.Features.ProductsSales.Commands;
 public sealed record AddProductCommand(
     string ProductCode,
     string ProductName,
-    float UnitPrice) : IRequest<Unit>
+    float UnitPrice) : IRequest<int>
 {
-    public class AddProductCommandHandler : IRequestHandler<AddProductCommand>
+    public class AddProductCommandHandler : IRequestHandler<AddProductCommand, int>
     {
         private readonly IProductsSalesRepository _productsSalesRepository;
         public AddProductCommandHandler(IProductsSalesRepository productsSalesRepository)
@@ -17,11 +17,11 @@ public sealed record AddProductCommand(
             _productsSalesRepository = productsSalesRepository;
         }
 
-        public async Task<Unit> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             var newProduct = new ProductEntity(request.ProductCode, request.ProductName, request.UnitPrice);
-            await _productsSalesRepository.AddProductAsync(newProduct);
-            return Unit.Value;
+            var result = await _productsSalesRepository.AddProductAsync(newProduct);
+            return result;
         }
     }
 }
