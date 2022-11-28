@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MarketingManagementSystem.Application.Exceptions;
 using MarketingManagementSystem.Application.Interfaces;
+using MarketingManagementSystem.Application.Models;
 using MarketingManagementSystem.Domain.Entities;
 using MarketingManagementSystem.Domain.Enums;
 using MediatR;

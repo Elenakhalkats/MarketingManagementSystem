@@ -1,4 +1,5 @@
-﻿using MarketingManagementSystem.Domain.Entities;
+﻿using MarketingManagementSystem.Application.Models;
+using MarketingManagementSystem.Domain.Entities;
 
 namespace MarketingManagementSystem.Application.ResponseModels;
 

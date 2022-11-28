@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MarketingManagementSystem.Application.Interfaces;
-using MarketingManagementSystem.Domain.Entities;
+using MarketingManagementSystem.Application.Models;
 using MediatR;
 
 namespace MarketingManagementSystem.Application.Features.ProductsSales.Queries;

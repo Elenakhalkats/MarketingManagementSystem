@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MarketingManagementSystem.Application.Exceptions;
 using MarketingManagementSystem.Application.Interfaces;
-using MarketingManagementSystem.Domain.Entities;
+using MarketingManagementSystem.Application.Models;
 using MediatR;
 
 namespace MarketingManagementSystem.Application.Features.Distributors.Queries;

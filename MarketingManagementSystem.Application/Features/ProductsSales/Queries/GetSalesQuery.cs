@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MarketingManagementSystem.Application.Interfaces;
+using MarketingManagementSystem.Application.Models;
 using MarketingManagementSystem.Application.ResponseModels;
-using MarketingManagementSystem.Domain.Entities;
 using MediatR;
 
 namespace MarketingManagementSystem.Application.Features.ProductsSales.Queries;

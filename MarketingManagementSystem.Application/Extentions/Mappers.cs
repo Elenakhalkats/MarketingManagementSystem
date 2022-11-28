@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MarketingManagementSystem.Application.ResponseModels;
+using MarketingManagementSystem.Application.Models;
 using MarketingManagementSystem.Domain.Entities;
 
 namespace MarketingManagementSystem.Application.Extentions;

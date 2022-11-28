@@ -1,4 +1,4 @@
-﻿using MarketingManagementSystem.Domain.Entities;
+﻿using MarketingManagementSystem.Application.Models;
 
 public class DistributorSales
 {
